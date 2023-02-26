@@ -20,6 +20,9 @@ assert deserialize(serialize(node)).left.left.val == 'left.left'
 '''
 
 
+from typing import Optional
+
+
 class Node:
     def __init__(self, val, left=None, right=None):
         self.val = val
@@ -27,15 +30,27 @@ class Node:
         self.right = right
 
 
-def build_tree(num_nodes):
+def multiply_node_name(name: str, num_times: int):
+    node_name = ""
+    for x in range(0, num_times):
+        node_name += name + "."
+    return node_name.rstrip(node_name[-1])
 
-    left_size = num_nodes / 2
-    right_size = num_nodes / 2
 
-    return Node('root')
+def build_tree(node_name: str, depth: int) -> Optional[Node]:
+    MAX_DEPTH = 4
+    node = None
+
+    if depth < MAX_DEPTH:
+        node = Node(node_name)
+        depth = depth + 1
+        node.left = build_tree(node_name + ".left", depth=depth)
+        node.right = build_tree(node_name + ".right", depth=depth)
+    return node
 
 
 def deserialize(tree):
+    print(tree)
     pass
 
 
@@ -47,5 +62,5 @@ def serialize(node):
         serialize(node.right)
 
 
-tree = build_tree(8)
-serialize(tree)
+tree = build_tree('root', 0)
+deserialize(serialize(tree))

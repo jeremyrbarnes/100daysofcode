@@ -12,3 +12,23 @@ The input [1, 2, 0] should give 3.
 
 You can modify the input array in-place.
 '''
+from typing import Optional
+import numpy as np
+
+
+def find_first_missing_int(arr) -> Optional[int]:
+    last_i = min(arr)
+    if last_i > 0:
+        last_i = 0
+
+    for i in arr:
+        if i - last_i > 1:
+            return last_i + 1
+        last_i = i
+    return None
+
+
+arr = np.random.randint(-100, high=100, size=25)
+arr.sort()
+print(arr)
+print(find_first_missing_int(arr))
