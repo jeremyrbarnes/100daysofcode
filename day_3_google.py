@@ -51,7 +51,6 @@ def build_tree(node_name: str, depth: int) -> Optional[Node]:
 
 def deserialize(tree):
     print(tree)
-    pass
 
 
 def serialize(node):
