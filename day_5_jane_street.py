@@ -20,11 +20,15 @@ def cons(a, b):
 
 
 def car(p):
-    return p.__closure__[0].cell_contents
+    if p is not None:
+        return p.__closure__[0].cell_contents
+    return None
 
 
 def cdr(p):
-    return p.__closure__[1].cell_contents
+    if p is not None:
+        return p.__closure__[1].cell_contents
+    return None
 
 
 print(car(cons(3, 4)))
